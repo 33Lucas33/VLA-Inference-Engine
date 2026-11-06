@@ -1,0 +1,5 @@
+action_schema_id: mock-v1
+lower: -1.0
+upper: 1.0
+on_empty_queue: explicit_hold
+on_invalid_chunk: reject

@@ -1,0 +1,13 @@
+type: smolvla
+status: metadata_and_command_only
+checkpoint: null  # provide a path; weights remain outside this repository
+input_features:
+  observation.images.image: [3, 256, 256]
+  observation.images.image2: [3, 256, 256]
+  observation.state: [8]
+action_feature: [7]
+prompt_source: libero_task_language
+rename_map: {}
+chunk_size: 50
+num_steps: 10
+n_action_steps: 1

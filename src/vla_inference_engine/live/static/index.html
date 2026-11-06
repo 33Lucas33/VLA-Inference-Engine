@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>LIBERO 模型演示台</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <header>
+    <div><small>VLA-Inference-Engine · 交互演示</small><h1>LIBERO 模型演示台</h1></div>
+    <span id="connection" class="pill">正在连接</span>
+  </header>
+  <main>
+    <aside class="panel">
+      <h2>选择任务</h2>
+      <label>Suite<select id="suite"></select></label>
+      <label>Task<select id="task"></select></label>
+      <p id="language" class="task-language">加载任务中…</p>
+      <label>Checkpoint<select id="model"></select></label>
+      <div class="inputs"><label>Seed<input id="seed" type="number" min="0" value="1000"></label>
+      <label>初态编号<input id="initState" type="number" min="0" max="99" value="0"></label></div>
+      <button id="load" class="primary">加载场景与模型</button>
+      <h2>控制</h2>
+      <div class="controls">
+        <button id="start" disabled>模型接管</button><button id="pause" disabled>暂停</button>
+        <button id="resume" disabled>继续</button><button id="step" disabled>执行一步</button>
+        <button id="reset" disabled>重置同一初态</button><button id="stop" disabled>结束</button>
+      </div>
+      <p id="message" role="status">选择任务后加载。</p>
+    </aside>
+    <section class="content">
+      <div class="stats">
+        <div><span>状态</span><strong id="state">IDLE</strong></div>
+        <div><span>进度</span><strong id="progress">0 / —</strong></div>
+        <div><span>推理耗时</span><strong id="inference">—</strong></div>
+        <div><span>墙钟时间</span><strong id="elapsed">—</strong></div>
+      </div>
+      <div class="cameras">
+        <figure><img id="mainCamera" alt="LIBERO 主相机画面"><figcaption>主相机 · 桌面与机械臂</figcaption></figure>
+        <figure><img id="wristCamera" alt="LIBERO 腕部相机画面"><figcaption>腕部相机 · 夹爪视角</figcaption></figure>
+      </div>
+      <div class="panel data">
+        <h2>当前动作</h2>
+        <p>平移 XYZ · 旋转 XYZ · 夹爪。下列是动作数值，不代表直接测得的米或弧度位移。</p>
+        <div class="actions"><div><h3>模型输出</h3><pre id="normalized">—</pre></div>
+          <div><h3>处理后</h3><pre id="processed">—</pre></div>
+          <div><h3>环境动作</h3><pre id="environment">—</pre></div></div>
+        <h3 class="chart-heading">环境动作前三维随步数变化</h3>
+        <div class="legend"><span class="axis-x">X</span><span class="axis-y">Y</span><span class="axis-z">Z</span></div>
+        <canvas id="actionChart" width="720" height="150" role="img" aria-label="环境动作 X Y Z 历史曲线"></canvas>
+        <p id="outcome">交互运行独立记录，不计入正式测评。</p>
+      </div>
+    </section>
+  </main>
+  <script src="/static/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,1078 @@
+{
+  "recorded_at": "2026-11-05T17:35:04.859014+08:00",
+  "scope": "首个测评子项目阶段结项；论文分数差距诊断未闭环，新机器重建未验证",
+  "training": {
+    "train_config_snapshot": "train_config.json",
+    "source": {
+      "path": "$ASSET_ROOT/outputs/train/smolvla_libero_100k_b64/checkpoints/100000/pretrained_model/train_config.json",
+      "sha256": "71e57ca846a501d4c1a3aec96fdde31ff37edd15a64fa2327a19cc1833885a32"
+    },
+    "runtime_manifest": {
+      "path": "$ASSET_ROOT/outputs/train/smolvla_libero_100k_b64/runtime_manifest.json",
+      "sha256": "d6bf9a8468c7657c03d2c981c05e2faa3f6d4af64624d992df269d96cccc8c90"
+    },
+    "runtime_argv": [
+      "python",
+      "lerobot-train",
+      "--policy.type=smolvla",
+      "--policy.load_vlm_weights=true",
+      "--policy.freeze_vision_encoder=true",
+      "--policy.train_expert_only=true",
+      "--policy.train_state_proj=true",
+      "--policy.chunk_size=50",
+      "--policy.n_action_steps=1",
+      "--policy.num_steps=10",
+      "--policy.compile_model=true",
+      "--policy.compile_mode=max-autotune",
+      "--policy.optimizer_lr=0.0001",
+      "--policy.optimizer_betas=[0.9,0.95]",
+      "--policy.optimizer_weight_decay=0.0000000001",
+      "--policy.scheduler_warmup_steps=1000",
+      "--policy.scheduler_decay_steps=100000",
+      "--policy.scheduler_decay_lr=0.0000025",
+      "--policy.push_to_hub=false",
+      "--dataset.repo_id=lerobot/libero",
+      "--dataset.revision=a1aaacb7f6cd6ee5fb43120f673cebb0cfea7dd4",
+      "--dataset.root=$ASSET_ROOT/artifacts/datasets/lerobot-libero",
+      "--dataset.video_backend=torchcodec",
+      "--output_dir=$ASSET_ROOT/outputs/train/smolvla_libero_100k_b64",
+      "--job_name=smolvla_libero_100k_b64",
+      "--seed=1000",
+      "--cudnn_deterministic=true",
+      "--steps=100000",
+      "--batch_size=64",
+      "--accelerator.gradient_accumulation.steps=1",
+      "--accelerator.mixed_precision=bf16",
+      "--num_workers=4",
+      "--env_eval_freq=0",
+      "--eval_steps=0",
+      "--log_freq=10",
+      "--save_checkpoint=true",
+      "--save_freq=50000",
+      "--wandb.enable=true",
+      "--wandb.mode=offline",
+      "--wandb.project=smolvla-libero"
+    ],
+    "parameter_counts": {
+      "total_parameters": 450046176,
+      "trainable_parameters": 99880992,
+      "trainable_percent": 22.19349865112508
+    },
+    "validation": {
+      "valid": true,
+      "run_dir": "$ASSET_ROOT/outputs/train/smolvla_libero_100k_b64",
+      "expected_steps": 100000,
+      "observed_checkpoint_directories": [
+        "050000",
+        "100000"
+      ],
+      "checkpoints": {
+        "050000": {
+          "valid": true,
+          "errors": [],
+          "model_bytes": 906712552
+        },
+        "100000": {
+          "valid": true,
+          "errors": [],
+          "model_bytes": 906712552
+        }
+      },
+      "errors": [],
+      "sha256_manifests": {
+        "050000": "$ASSET_ROOT/outputs/train/smolvla_libero_100k_b64/checkpoints/050000/artifact_manifest.sha256",
+        "100000": "$ASSET_ROOT/outputs/train/smolvla_libero_100k_b64/checkpoints/100000/artifact_manifest.sha256"
+      },
+      "sha256_manifest": "$ASSET_ROOT/outputs/train/smolvla_libero_100k_b64/checkpoints/100000/artifact_manifest.sha256"
+    },
+    "metrics": {
+      "expected_steps": 100000,
+      "latest_step": 100000,
+      "progress_percent": 100.0,
+      "metric_rows": 10000,
+      "expected_metric_rows": 10000,
+      "log_frequency_steps": 10,
+      "first_metric_step": 10,
+      "metric_coverage_percent": 100.0,
+      "missing_metric_step_count": 0,
+      "missing_metric_steps_preview": [],
+      "unexpected_metric_step_count": 0,
+      "unexpected_metric_steps_preview": [],
+      "duplicate_metric_step_count": 0,
+      "duplicate_metric_steps_preview": [],
+      "log_sequence_complete": true,
+      "first_metric_timestamp": "2026-08-15 23:09:41",
+      "latest_metric_timestamp": "2026-08-16 20:39:15",
+      "observed_metric_wall_s": 77374.0,
+      "optimizer_loop_elapsed_s": 77432.0,
+      "optimizer_loop_elapsed_hours": 21.50888888888889,
+      "single_gpu_training_hours": 21.50888888888889,
+      "peak_cuda_allocated_gb": 6.12,
+      "peak_cuda_memory_metric": "torch.cuda.max_memory_allocated / 2^30",
+      "loss": {
+        "first": 2.488,
+        "latest": 0.092,
+        "minimum": 0.069
+      },
+      "gradient_norm": {
+        "latest": 0.805,
+        "maximum": 21.913
+      },
+      "learning_rate_latest": 2.5e-06,
+      "median_step_s": 0.768,
+      "median_samples_per_s": 83.0,
+      "maximum_step_s": 28.45,
+      "long_step_threshold_s": 5.0,
+      "long_step_event_count": 2,
+      "long_step_events": [
+        {
+          "step": 10,
+          "timestamp": "2026-08-15 23:09:41",
+          "step_s": 5.771
+        },
+        {
+          "step": 4280,
+          "timestamp": "2026-08-16 00:08:37",
+          "step_s": 28.45
+        }
+      ],
+      "estimated_remaining_hours": 0.0,
+      "warmup_complete": true,
+      "nonfinite_matches": 0,
+      "fatal_matches": 0,
+      "cuda_oom_matches": 0,
+      "traceback_matches": 0,
+      "compile_diagnostics": {
+        "graph_tags": [
+          "10/1",
+          "12/2",
+          "9/1"
+        ],
+        "autotune_choice_stats": 62,
+        "triton_candidate_resource_rejections": 156,
+        "sympy_interpreter_warnings": 92,
+        "candidate_rejections_are_fatal": false
+      },
+      "numerically_healthy": true
+    },
+    "metrics_source": {
+      "path": "$ASSET_ROOT/results/training/training_summary.json",
+      "sha256": "1b13a28a2334a62862d0c4bbffb7f270c6c982c7d3270f1b78394934ffffabf5"
+    }
+  },
+  "models": {
+    "smolvla_libero_paper": {
+      "model_path": "$ASSET_ROOT/artifacts/models/smolvla_libero_paper",
+      "model_sha256": "71d9563c8295284acba8fc2d5c19de000d6fe9ba58a406832af7ef3d221ed52f",
+      "config": {
+        "type": "smolvla",
+        "n_obs_steps": 1,
+        "input_features": {
+          "observation.images.image": {
+            "type": "VISUAL",
+            "shape": [
+              3,
+              256,
+              256
+            ]
+          },
+          "observation.images.image2": {
+            "type": "VISUAL",
+            "shape": [
+              3,
+              256,
+              256
+            ]
+          },
+          "observation.state": {
+            "type": "STATE",
+            "shape": [
+              8
+            ]
+          }
+        },
+        "output_features": {
+          "action": {
+            "type": "ACTION",
+            "shape": [
+              7
+            ]
+          }
+        },
+        "device": "cuda",
+        "use_amp": false,
+        "push_to_hub": true,
+        "repo_id": "None",
+        "private": null,
+        "tags": null,
+        "license": null,
+        "chunk_size": 50,
+        "n_action_steps": 1,
+        "normalization_mapping": {
+          "VISUAL": "IDENTITY",
+          "STATE": "MEAN_STD",
+          "ACTION": "MEAN_STD"
+        },
+        "max_state_dim": 32,
+        "max_action_dim": 32,
+        "resize_imgs_with_padding": [
+          512,
+          512
+        ],
+        "empty_cameras": 0,
+        "adapt_to_pi_aloha": false,
+        "use_delta_joint_actions_aloha": false,
+        "tokenizer_max_length": 48,
+        "num_steps": 10,
+        "use_cache": true,
+        "freeze_vision_encoder": true,
+        "train_expert_only": true,
+        "train_state_proj": true,
+        "optimizer_lr": 0.0001,
+        "optimizer_betas": [
+          0.9,
+          0.95
+        ],
+        "optimizer_eps": 1e-08,
+        "optimizer_weight_decay": 1e-10,
+        "optimizer_grad_clip_norm": 10,
+        "scheduler_warmup_steps": 1000,
+        "scheduler_decay_steps": 30000,
+        "scheduler_decay_lr": 2.5e-06,
+        "vlm_model_name": "HuggingFaceTB/SmolVLM2-500M-Instruct",
+        "load_vlm_weights": true,
+        "add_image_special_tokens": false,
+        "attention_mode": "cross_attn",
+        "prefix_length": 0,
+        "pad_language_to": "longest",
+        "num_expert_layers": -1,
+        "num_vlm_layers": 0,
+        "self_attn_every_n_layers": 2,
+        "expert_width_multiplier": 0.5,
+        "min_period": 0.004,
+        "max_period": 4.0
+      },
+      "tensor_profile": {
+        "stored_tensor_elements": 604934176,
+        "count_method": "safetensors header shape product; tensor count, not runtime trainable parameter count",
+        "vlm_text_layers": 32,
+        "action_expert_layers": 32
+      },
+      "formal_validation": {
+        "valid": true,
+        "errors": [],
+        "summary": "$REPO_ROOT/results/smolvla_libero_paper/metrics_summary.json",
+        "summary_sha256": "11565f4defe480e727e0d2a0c16789b47af36bee5057bf5f7e7a1a1cb0d2a06f",
+        "provenance": "$REPO_ROOT/outputs/provenance/assets.json",
+        "provenance_sha256": "bef022862502c89225605d3b2a8d6852b074c1e38b209cad8878e45637451194",
+        "environment_markers": [
+          "NVIDIA GeForce RTX 3090",
+          "580.178.04",
+          "Python 3.12.13",
+          "torch==2.11.0+cu128",
+          "hf_libero==0.1.4",
+          "mujoco==3.8.1",
+          "8ae2354592ec4480c38134fb75350b8e7992e0e9#egg=lerobot"
+        ],
+        "raw_root": "$REPO_ROOT/results/raw/smolvla_libero_paper",
+        "expected_model_label": "smolvla_libero_paper",
+        "expected_seeds": [
+          1000,
+          2000,
+          3000
+        ],
+        "canonical_summary_match": true,
+        "raw_run_count": 3,
+        "observed_nonempty_videos": 1200,
+        "runs": [
+          {
+            "seed": 1000,
+            "eval_info": "$REPO_ROOT/results/raw/smolvla_libero_paper/seed_1000/eval_info.json",
+            "eval_info_sha256": "0f21aa28dacc3e574ad2fa30d85e599c3047a723e9e911331db285f3ccdd8476",
+            "valid": true,
+            "observed_episodes": 400,
+            "observed_nonempty_videos": 400,
+            "command_preflight_valid": true,
+            "run_artifacts_valid": true,
+            "run_artifacts": {
+              "valid": true,
+              "errors": [],
+              "artifacts": {
+                "command": "$REPO_ROOT/results/raw/smolvla_libero_paper/seed_1000/command.sh",
+                "preflight": "$REPO_ROOT/results/raw/smolvla_libero_paper/seed_1000/command_preflight.json",
+                "protocol_validation": "$REPO_ROOT/results/raw/smolvla_libero_paper/seed_1000/protocol_validation.json",
+                "environment": "$REPO_ROOT/results/raw/smolvla_libero_paper/seed_1000/environment.txt",
+                "eval_log": "$REPO_ROOT/outputs/logs/eval/smolvla_libero_paper/seed_1000.log"
+              },
+              "sha256": {
+                "command": "fa29d47c975396b5d592b4777fcd2f91b3d667bd885bb8f56bdeaddfb8a03943",
+                "preflight": "d27e33ef6f4bc40970c6c7003b9e8958d86ed97df338e4d3c6307fe4b98dcda9",
+                "protocol_validation": "ef24a604d517db22426eda7ed99ad3a84b25dd3c51b837a77a7505239da3ade1",
+                "environment": "73ad23ee2806b3404615e4569b46ac8d4789f7e0049b664d98d9656f3ef58ff4",
+                "eval_log": "fcd4538b506c448b8536a00f32634e70122a0829d07e62daf62551440cd8f61b"
+              }
+            },
+            "errors": []
+          },
+          {
+            "seed": 2000,
+            "eval_info": "$REPO_ROOT/results/raw/smolvla_libero_paper/seed_2000/eval_info.json",
+            "eval_info_sha256": "2162d8c71efd0087fcf15188e4ebc257c53e7f1c48dbee558d504e265d30d557",
+            "valid": true,
+            "observed_episodes": 400,
+            "observed_nonempty_videos": 400,
+            "command_preflight_valid": true,
+            "run_artifacts_valid": true,
+            "run_artifacts": {
+              "valid": true,
+              "errors": [],
+              "artifacts": {
+                "command": "$REPO_ROOT/results/raw/smolvla_libero_paper/seed_2000/command.sh",
+                "preflight": "$REPO_ROOT/results/raw/smolvla_libero_paper/seed_2000/command_preflight.json",
+                "protocol_validation": "$REPO_ROOT/results/raw/smolvla_libero_paper/seed_2000/protocol_validation.json",
+                "environment": "$REPO_ROOT/results/raw/smolvla_libero_paper/seed_2000/environment.txt",
+                "eval_log": "$REPO_ROOT/outputs/logs/eval/smolvla_libero_paper/seed_2000.log"
+              },
+              "sha256": {
+                "command": "b90dbfafa31036acaebdf153b4ddc89288cc043323b8bd003ab7e9efe3a029d4",
+                "preflight": "208f77ae28d2a2b66033a86f3a90f893fd6d13ad1920fcbe70081cfc272022db",
+                "protocol_validation": "ef24a604d517db22426eda7ed99ad3a84b25dd3c51b837a77a7505239da3ade1",
+                "environment": "d8cf67eb9e399b316fbec1ae7490e2fc7e791d5a7dc1a3bc509927e80dba275a",
+                "eval_log": "a3be60df56f7c3bd3145b27eddde921de3957867e1138aa5f971ed7f7c5f7f20"
+              }
+            },
+            "errors": []
+          },
+          {
+            "seed": 3000,
+            "eval_info": "$REPO_ROOT/results/raw/smolvla_libero_paper/seed_3000/eval_info.json",
+            "eval_info_sha256": "1ebbcefc76bce8d5686d02bab5a1145e85cbe7dac531e448219d60193e0e6bf6",
+            "valid": true,
+            "observed_episodes": 400,
+            "observed_nonempty_videos": 400,
+            "command_preflight_valid": true,
+            "run_artifacts_valid": true,
+            "run_artifacts": {
+              "valid": true,
+              "errors": [],
+              "artifacts": {
+                "command": "$REPO_ROOT/results/raw/smolvla_libero_paper/seed_3000/command.sh",
+                "preflight": "$REPO_ROOT/results/raw/smolvla_libero_paper/seed_3000/command_preflight.json",
+                "protocol_validation": "$REPO_ROOT/results/raw/smolvla_libero_paper/seed_3000/protocol_validation.json",
+                "environment": "$REPO_ROOT/results/raw/smolvla_libero_paper/seed_3000/environment.txt",
+                "eval_log": "$REPO_ROOT/outputs/logs/eval/smolvla_libero_paper/seed_3000.log"
+              },
+              "sha256": {
+                "command": "2c2759f95ffc8958bbfd3f35246995ac1a5ac92812752ae8cf32f3530b591bd2",
+                "preflight": "667d86d99a16f42273dba9b23b7ef4dc88930dd0da349a3a9cdb3e0343c550b9",
+                "protocol_validation": "ef24a604d517db22426eda7ed99ad3a84b25dd3c51b837a77a7505239da3ade1",
+                "environment": "e565634d21ba270de7905df210f27674100dca05f6794a1b0a3b3c7acb0b9a22",
+                "eval_log": "2ac2eaee13654bc9ade07f33d61364b8c7eb8f476b5f97fad7bd139ca40faed1"
+              }
+            },
+            "errors": []
+          }
+        ]
+      },
+      "formal_validation_source": {
+        "path": "$REPO_ROOT/results/smolvla_libero_paper/formal_validation.json",
+        "sha256": "e395ebe9c383213fd58c12410beb0a3b23447ac5e0ee695a7de310da355cb1be"
+      },
+      "summary": {
+        "suites": {
+          "libero_spatial": {
+            "successes": 226,
+            "episodes": 300,
+            "success_rate": 75.33333333333333,
+            "wilson_95_low": 70.15546972961404,
+            "wilson_95_high": 79.87061972834229,
+            "seed_mean": 75.33333333333333,
+            "seed_sd": 2.516611478423583,
+            "paper_baseline": 90.0,
+            "shortfall_percentage_points": 14.666666666666671,
+            "relative_shortfall_percent": 16.2962962962963,
+            "requires_retest": false
+          },
+          "libero_object": {
+            "successes": 265,
+            "episodes": 300,
+            "success_rate": 88.33333333333333,
+            "wilson_95_low": 84.20668566758442,
+            "wilson_95_high": 91.4906865385337,
+            "seed_mean": 88.33333333333333,
+            "seed_sd": 0.5773502691896257,
+            "paper_baseline": 96.0,
+            "shortfall_percentage_points": 7.666666666666671,
+            "relative_shortfall_percent": 7.986111111111117,
+            "requires_retest": false
+          },
+          "libero_goal": {
+            "successes": 237,
+            "episodes": 300,
+            "success_rate": 79.0,
+            "wilson_95_low": 74.03888774230657,
+            "wilson_95_high": 83.22781992666975,
+            "seed_mean": 79.0,
+            "seed_sd": 1.7320508075688772,
+            "paper_baseline": 92.0,
+            "shortfall_percentage_points": 13.0,
+            "relative_shortfall_percent": 14.130434782608695,
+            "requires_retest": false
+          },
+          "libero_10": {
+            "successes": 113,
+            "episodes": 300,
+            "success_rate": 37.666666666666664,
+            "wilson_95_low": 32.37203650702255,
+            "wilson_95_high": 43.27315678318291,
+            "seed_mean": 37.666666666666664,
+            "seed_sd": 3.7859388972001824,
+            "paper_baseline": 71.0,
+            "shortfall_percentage_points": 33.333333333333336,
+            "relative_shortfall_percent": 46.948356807511736,
+            "requires_retest": true
+          }
+        },
+        "overall": {
+          "successes": 841,
+          "episodes": 1200,
+          "micro_success_rate": 70.08333333333333,
+          "macro_suite_success_rate": 70.08333333333333,
+          "wilson_95_low": 67.43186466449261,
+          "wilson_95_high": 72.60663014463087,
+          "paper_macro_baseline": 87.3,
+          "evaluation_wall_s": 100225.54092502594,
+          "evaluation_wall_hours": 27.840428034729428,
+          "evaluation_mean_episode_s": 83.52128410418828,
+          "evaluation_seed_wall_s": {
+            "1000": 33054.948091983795,
+            "2000": 33524.651055812836,
+            "3000": 33645.94177722931
+          },
+          "evaluation_time_definition": "sum of eval_info.overall.eval_s over formal seeds"
+        },
+        "observed_seeds": [
+          1000,
+          2000,
+          3000
+        ],
+        "expected_seed_ids": [
+          1000,
+          2000,
+          3000
+        ],
+        "expected_seed_count": 3,
+        "expected_episodes_per_suite": 300,
+        "requires_video_evidence": true,
+        "requires_command_preflight": true,
+        "protocol_complete": true,
+        "requires_retest": true
+      },
+      "summary_source": {
+        "path": "$REPO_ROOT/results/smolvla_libero_paper/metrics_summary.json",
+        "sha256": "11565f4defe480e727e0d2a0c16789b47af36bee5057bf5f7e7a1a1cb0d2a06f"
+      }
+    },
+    "smolvla_libero_100k": {
+      "model_path": "$ASSET_ROOT/outputs/train/smolvla_libero_100k_b64/checkpoints/100000/pretrained_model",
+      "model_sha256": "4500d7912009c629c15a09f866f172c81f739098745385094897362e8e366f36",
+      "config": {
+        "type": "smolvla",
+        "n_obs_steps": 1,
+        "input_features": {
+          "observation.images.image": {
+            "type": "VISUAL",
+            "shape": [
+              3,
+              256,
+              256
+            ]
+          },
+          "observation.images.image2": {
+            "type": "VISUAL",
+            "shape": [
+              3,
+              256,
+              256
+            ]
+          },
+          "observation.state": {
+            "type": "STATE",
+            "shape": [
+              8
+            ]
+          }
+        },
+        "output_features": {
+          "action": {
+            "type": "ACTION",
+            "shape": [
+              7
+            ]
+          }
+        },
+        "device": "cuda",
+        "use_amp": false,
+        "use_peft": false,
+        "push_to_hub": false,
+        "repo_id": null,
+        "private": null,
+        "tags": null,
+        "license": null,
+        "pretrained_path": null,
+        "pretrained_revision": null,
+        "chunk_size": 50,
+        "n_action_steps": 1,
+        "normalization_mapping": {
+          "VISUAL": "IDENTITY",
+          "STATE": "MEAN_STD",
+          "ACTION": "MEAN_STD"
+        },
+        "max_state_dim": 32,
+        "max_action_dim": 32,
+        "resize_imgs_with_padding": [
+          512,
+          512
+        ],
+        "empty_cameras": 0,
+        "adapt_to_pi_aloha": false,
+        "use_delta_joint_actions_aloha": false,
+        "tokenizer_max_length": 48,
+        "num_steps": 10,
+        "use_cache": true,
+        "freeze_vision_encoder": true,
+        "train_expert_only": true,
+        "train_state_proj": true,
+        "optimizer_lr": 0.0001,
+        "optimizer_betas": [
+          0.9,
+          0.95
+        ],
+        "optimizer_eps": 1e-08,
+        "optimizer_weight_decay": 1e-10,
+        "optimizer_grad_clip_norm": 10,
+        "scheduler_warmup_steps": 1000,
+        "scheduler_decay_steps": 100000,
+        "scheduler_decay_lr": 2.5e-06,
+        "vlm_model_name": "HuggingFaceTB/SmolVLM2-500M-Video-Instruct",
+        "load_vlm_weights": true,
+        "add_image_special_tokens": false,
+        "attention_mode": "cross_attn",
+        "prefix_length": -1,
+        "pad_language_to": "longest",
+        "num_expert_layers": -1,
+        "num_vlm_layers": 16,
+        "self_attn_every_n_layers": 2,
+        "expert_width_multiplier": 0.75,
+        "min_period": 0.004,
+        "max_period": 4.0,
+        "rtc_config": null,
+        "compile_model": true,
+        "compile_mode": "max-autotune"
+      },
+      "tensor_profile": {
+        "stored_tensor_elements": 450046176,
+        "count_method": "safetensors header shape product; tensor count, not runtime trainable parameter count",
+        "vlm_text_layers": 16,
+        "action_expert_layers": 16
+      },
+      "formal_validation": {
+        "valid": true,
+        "errors": [],
+        "summary": "$REPO_ROOT/results/smolvla_libero_100k/metrics_summary.json",
+        "summary_sha256": "1ee2950257bace0e70f80a088c2d0873bc041e7f628eeb23d35a92ffe1bcc987",
+        "provenance": "$REPO_ROOT/outputs/provenance/assets.json",
+        "provenance_sha256": "bef022862502c89225605d3b2a8d6852b074c1e38b209cad8878e45637451194",
+        "environment_markers": [
+          "NVIDIA GeForce RTX 3090",
+          "580.178.04",
+          "Python 3.12.13",
+          "torch==2.11.0+cu128",
+          "hf_libero==0.1.4",
+          "mujoco==3.8.1",
+          "8ae2354592ec4480c38134fb75350b8e7992e0e9#egg=lerobot"
+        ],
+        "raw_root": "$REPO_ROOT/results/raw/smolvla_libero_100k",
+        "expected_model_label": "smolvla_libero_100k",
+        "expected_seeds": [
+          1000,
+          2000,
+          3000
+        ],
+        "canonical_summary_match": true,
+        "raw_run_count": 3,
+        "observed_nonempty_videos": 1200,
+        "runs": [
+          {
+            "seed": 1000,
+            "eval_info": "$REPO_ROOT/results/raw/smolvla_libero_100k/seed_1000/eval_info.json",
+            "eval_info_sha256": "fc688eca77126bdfb34cd4f34b459b8b7ff4a32e37ce0a20132fbdb06c760b42",
+            "valid": true,
+            "observed_episodes": 400,
+            "observed_nonempty_videos": 400,
+            "command_preflight_valid": true,
+            "run_artifacts_valid": true,
+            "run_artifacts": {
+              "valid": true,
+              "errors": [],
+              "artifacts": {
+                "command": "$REPO_ROOT/results/raw/smolvla_libero_100k/seed_1000/command.sh",
+                "preflight": "$REPO_ROOT/results/raw/smolvla_libero_100k/seed_1000/command_preflight.json",
+                "protocol_validation": "$REPO_ROOT/results/raw/smolvla_libero_100k/seed_1000/protocol_validation.json",
+                "environment": "$REPO_ROOT/results/raw/smolvla_libero_100k/seed_1000/environment.txt",
+                "eval_log": "$REPO_ROOT/outputs/logs/eval/smolvla_libero_100k/seed_1000.log"
+              },
+              "sha256": {
+                "command": "cdcb93d58bb43996e475d2c444714add739e6e9b49b0dec0360557dfdc84476b",
+                "preflight": "640026eea1f750dbc192147fd41aff51ec320bb9772db3c9dd59b7aac7c8fad0",
+                "protocol_validation": "ef24a604d517db22426eda7ed99ad3a84b25dd3c51b837a77a7505239da3ade1",
+                "environment": "1620f47f10e17534cec0d0ea92f4fd1ea654ebafe7cd4d08dd784a831cc26a4b",
+                "eval_log": "aa08c4df32253c90d6e38eab8aa362c122c4c50fbd6935baa501ad8a17afd4a0"
+              }
+            },
+            "errors": []
+          },
+          {
+            "seed": 2000,
+            "eval_info": "$REPO_ROOT/results/raw/smolvla_libero_100k/seed_2000/eval_info.json",
+            "eval_info_sha256": "c8dab5643c492633887b177a578a1a6b2fd0dabc96b34ac7c8720dc2b2b4906f",
+            "valid": true,
+            "observed_episodes": 400,
+            "observed_nonempty_videos": 400,
+            "command_preflight_valid": true,
+            "run_artifacts_valid": true,
+            "run_artifacts": {
+              "valid": true,
+              "errors": [],
+              "artifacts": {
+                "command": "$REPO_ROOT/results/raw/smolvla_libero_100k/seed_2000/command.sh",
+                "preflight": "$REPO_ROOT/results/raw/smolvla_libero_100k/seed_2000/command_preflight.json",
+                "protocol_validation": "$REPO_ROOT/results/raw/smolvla_libero_100k/seed_2000/protocol_validation.json",
+                "environment": "$REPO_ROOT/results/raw/smolvla_libero_100k/seed_2000/environment.txt",
+                "eval_log": "$REPO_ROOT/outputs/logs/eval/smolvla_libero_100k/seed_2000.log"
+              },
+              "sha256": {
+                "command": "a9dee0e34113a849ee93bc97672621440f0c01afd8da622bbf79feb9edc60923",
+                "preflight": "0bfa34dce314490fafd8da55a6e9226cc150c4d10b8b5558b62f6e73cb05fa29",
+                "protocol_validation": "ef24a604d517db22426eda7ed99ad3a84b25dd3c51b837a77a7505239da3ade1",
+                "environment": "781570a4cf908c6e801d1faa3e56f512515ad4691c943a8145944cd70f68e075",
+                "eval_log": "b5bdfe29dc06ab1259989237c63364dd420642a9d9dbb5080a3551a2c96255de"
+              }
+            },
+            "errors": []
+          },
+          {
+            "seed": 3000,
+            "eval_info": "$REPO_ROOT/results/raw/smolvla_libero_100k/seed_3000/eval_info.json",
+            "eval_info_sha256": "ca250d9be2b2e6faa9c063e48c3d0eb5692e294d410c3e4300f0594a4f3b9045",
+            "valid": true,
+            "observed_episodes": 400,
+            "observed_nonempty_videos": 400,
+            "command_preflight_valid": true,
+            "run_artifacts_valid": true,
+            "run_artifacts": {
+              "valid": true,
+              "errors": [],
+              "artifacts": {
+                "command": "$REPO_ROOT/results/raw/smolvla_libero_100k/seed_3000/command.sh",
+                "preflight": "$REPO_ROOT/results/raw/smolvla_libero_100k/seed_3000/command_preflight.json",
+                "protocol_validation": "$REPO_ROOT/results/raw/smolvla_libero_100k/seed_3000/protocol_validation.json",
+                "environment": "$REPO_ROOT/results/raw/smolvla_libero_100k/seed_3000/environment.txt",
+                "eval_log": "$REPO_ROOT/outputs/logs/eval/smolvla_libero_100k/seed_3000.log"
+              },
+              "sha256": {
+                "command": "1a2a1a9b528bf9e2cf2ae27243d0aa4edcad92b6412d3c79d3cfdee8e4ef79fe",
+                "preflight": "24fb5416a2eda3b6a4f1f44995880e5ada17dacd3bf9535db1e1b45225b5eae9",
+                "protocol_validation": "ef24a604d517db22426eda7ed99ad3a84b25dd3c51b837a77a7505239da3ade1",
+                "environment": "195759ba7fd59368e9e6fb3d8e86b7ce09ae0b7899e49f24c2416a3fcce2091d",
+                "eval_log": "56879b43977faa1b68cfde89d67a8390275c27505579b36f541b30c4eeefac42"
+              }
+            },
+            "errors": []
+          }
+        ]
+      },
+      "formal_validation_source": {
+        "path": "$REPO_ROOT/results/smolvla_libero_100k/formal_validation.json",
+        "sha256": "fbf40ff98824e211ab4d67700fdd8c4861737343c4dbd79d7f9319741b04ea2c"
+      },
+      "summary": {
+        "suites": {
+          "libero_spatial": {
+            "successes": 233,
+            "episodes": 300,
+            "success_rate": 77.66666666666667,
+            "wilson_95_low": 72.62089140024803,
+            "wilson_95_high": 82.01286419199376,
+            "seed_mean": 77.66666666666667,
+            "seed_sd": 3.0550504633038935,
+            "paper_baseline": 90.0,
+            "shortfall_percentage_points": 12.333333333333329,
+            "relative_shortfall_percent": 13.703703703703697,
+            "requires_retest": false
+          },
+          "libero_object": {
+            "successes": 258,
+            "episodes": 300,
+            "success_rate": 86.0,
+            "wilson_95_low": 81.61683876490508,
+            "wilson_95_high": 89.47286730692758,
+            "seed_mean": 86.0,
+            "seed_sd": 2.6457513110645907,
+            "paper_baseline": 96.0,
+            "shortfall_percentage_points": 10.0,
+            "relative_shortfall_percent": 10.416666666666666,
+            "requires_retest": false
+          },
+          "libero_goal": {
+            "successes": 244,
+            "episodes": 300,
+            "success_rate": 81.33333333333333,
+            "wilson_95_low": 76.53812201652491,
+            "wilson_95_high": 85.33625178673687,
+            "seed_mean": 81.33333333333333,
+            "seed_sd": 3.0550504633038935,
+            "paper_baseline": 92.0,
+            "shortfall_percentage_points": 10.666666666666671,
+            "relative_shortfall_percent": 11.59420289855073,
+            "requires_retest": false
+          },
+          "libero_10": {
+            "successes": 174,
+            "episodes": 300,
+            "success_rate": 58.0,
+            "wilson_95_low": 52.34831499847111,
+            "wilson_95_high": 63.44939746193615,
+            "seed_mean": 58.0,
+            "seed_sd": 7.810249675906654,
+            "paper_baseline": 71.0,
+            "shortfall_percentage_points": 13.0,
+            "relative_shortfall_percent": 18.309859154929576,
+            "requires_retest": false
+          }
+        },
+        "overall": {
+          "successes": 909,
+          "episodes": 1200,
+          "micro_success_rate": 75.75,
+          "macro_suite_success_rate": 75.75,
+          "wilson_95_low": 73.24534947581492,
+          "wilson_95_high": 78.09031399314424,
+          "paper_macro_baseline": 87.3,
+          "evaluation_wall_s": 54537.3863427639,
+          "evaluation_wall_hours": 15.149273984101084,
+          "evaluation_mean_episode_s": 45.44782195230325,
+          "evaluation_seed_wall_s": {
+            "1000": 17895.824058294296,
+            "2000": 18222.664191007614,
+            "3000": 18418.89809346199
+          },
+          "evaluation_time_definition": "sum of eval_info.overall.eval_s over formal seeds"
+        },
+        "observed_seeds": [
+          1000,
+          2000,
+          3000
+        ],
+        "expected_seed_ids": [
+          1000,
+          2000,
+          3000
+        ],
+        "expected_seed_count": 3,
+        "expected_episodes_per_suite": 300,
+        "requires_video_evidence": true,
+        "requires_command_preflight": true,
+        "protocol_complete": true,
+        "requires_retest": false
+      },
+      "summary_source": {
+        "path": "$REPO_ROOT/results/smolvla_libero_100k/metrics_summary.json",
+        "sha256": "1ee2950257bace0e70f80a088c2d0873bc041e7f628eeb23d35a92ffe1bcc987"
+      }
+    }
+  },
+  "comparison": {
+    "paper_model": "smolvla_libero_paper",
+    "local_model": "smolvla_libero_100k",
+    "paper_protocol_complete": true,
+    "local_protocol_complete": true,
+    "requires_retest": true,
+    "baseline_retrieved_on": "2026-08-16",
+    "baseline_source_verification": {
+      "verified_at": "2026-08-16T02:57:00+08:00",
+      "arxiv": {
+        "version": "arXiv:2506.01844v1",
+        "source_url": "https://arxiv.org/src/2506.01844v1",
+        "table_path": "tables/main_results_libero.tex",
+        "table_sha256": "00327007cd1811e981fda3ef7ad385402a12c7782e1b17e2cc6c8f0d9c6bf835",
+        "experiments_path": "sections/04_experiments.tex",
+        "experiments_sha256": "4e531455d11acfc32e4543e6c0ccefe527154718fca7baf301011ec6b42ea4f2"
+      },
+      "lerobot_libero_doc": {
+        "source_url": "https://raw.githubusercontent.com/huggingface/lerobot/8ae2354592ec4480c38134fb75350b8e7992e0e9/docs/source/libero.mdx",
+        "sha256": "2d4e37a200684ec790c0218c242d175ed86a7c57bd1523eab2c967fdee683e11"
+      },
+      "paper_checkpoint": {
+        "revision": "6721902bc4d61e50a3bfdb11dfb4cb626f05d102",
+        "repository_head_observed": "6721902bc4d61e50a3bfdb11dfb4cb626f05d102",
+        "repository_last_modified": "2025-09-17T07:58:34.000Z",
+        "current_head_matches_fixed_revision": true,
+        "current_model_card_has_published_libero_scores": false,
+        "model_card_url": "https://huggingface.co/HuggingFaceVLA/smolvla_libero/raw/6721902bc4d61e50a3bfdb11dfb4cb626f05d102/README.md",
+        "model_card_sha256": "8f0505f851e9bec50a1ba37e5776f69bf12f7c8f5307f796deff026fb3761963",
+        "config_url": "https://huggingface.co/HuggingFaceVLA/smolvla_libero/resolve/6721902bc4d61e50a3bfdb11dfb4cb626f05d102/config.json",
+        "config_sha256": "e346a63094732ea28e05b08302a218306cf6541960b663a3cb4b6948e4efe6e0"
+      }
+    },
+    "checkpoint_comparison_scope": {
+      "episode_conditions_paired": true,
+      "same_model_family": "SmolVLA-0.45B",
+      "same_initialization": false,
+      "causal_training_ablation": false,
+      "paper_checkpoint_vlm": "HuggingFaceTB/SmolVLM2-500M-Instruct",
+      "local_training_vlm": "HuggingFaceTB/SmolVLM2-500M-Video-Instruct",
+      "interpretation": "deployment-level reproduction comparison under identical LIBERO episodes; not an identical-initialization training ablation"
+    },
+    "evaluation_implementation": {
+      "lerobot_commit": "8ae2354592ec4480c38134fb75350b8e7992e0e9",
+      "episode_length_override": null,
+      "resolved_suite_horizons": {
+        "libero_spatial": 280,
+        "libero_object": 280,
+        "libero_goal": 300,
+        "libero_10": 520
+      },
+      "source": "fixed LeRobot TASK_SUITE_MAX_STEPS used by the official recommended command",
+      "paper_disclosure": "SmolVLA Table 2 states tasks/trials/binary success but does not enumerate per-suite episode horizons"
+    },
+    "reported_reproduction_context": [
+      {
+        "source_url": "https://github.com/huggingface/lerobot/issues/2354",
+        "source_type": "unverified user report on the official LeRobot tracker",
+        "checkpoint": "HuggingFaceVLA/smolvla_libero",
+        "protocol_note": "n_action_steps=1, batch_size=1, 10 episodes/task; exact software/seed/init-state parity is not established",
+        "success_rate_percent": {
+          "libero_spatial": 73.0,
+          "libero_object": 91.0,
+          "libero_goal": 83.0,
+          "libero_10": 43.0
+        },
+        "used_for_40_percent_trigger": false
+      },
+      {
+        "source_url": "https://github.com/huggingface/lerobot/issues/3264",
+        "source_type": "unverified user report on the official LeRobot tracker",
+        "reported_on": "2026-04-02",
+        "checkpoint": "HuggingFaceVLA/smolvla_libero",
+        "protocol_note": "n_action_steps=10 differs from the SmolVLA paper setting, so this is diagnostic context only",
+        "success_rate_percent": {
+          "libero_spatial": 63.0,
+          "libero_object": 93.0,
+          "libero_goal": 81.0,
+          "libero_10": 56.0
+        },
+        "used_for_40_percent_trigger": false
+      },
+      {
+        "source_url": "https://github.com/huggingface/lerobot/issues/3287",
+        "source_type": "unverified user report on the official LeRobot tracker",
+        "reported_on": "2026-04-05",
+        "checkpoint": "locally trained SmolVLA-0.45B, 100k steps, batch 64",
+        "protocol_note": "training reproduction report; exact commit/config/seed parity was the subject of the issue",
+        "success_rate_percent": {
+          "libero_spatial": 83.0,
+          "libero_object": 70.0,
+          "libero_goal": 70.0,
+          "libero_10": 44.8
+        },
+        "used_for_40_percent_trigger": false
+      }
+    ],
+    "paired_analysis": {
+      "pairing_key": "seed, suite, task_id, episode_index",
+      "paired_episodes_per_suite": 300,
+      "fixed_init_state_ids_per_task": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "unique_fixed_init_states_per_task_across_seeds": 10,
+      "stochastic_replicates_per_task_init_state": 3,
+      "bootstrap_cluster": "seed x task (10 episodes per cluster)",
+      "sensitivity_bootstrap": "hierarchical task -> fixed init-state ID; retain all three seed replications",
+      "bootstrap_resamples": 10000,
+      "bootstrap_seed": 20260816,
+      "confidence_interval": "two-sided percentile 95%",
+      "hypothesis_test": "two-sided exact McNemar",
+      "multiple_comparison_correction": "Holm across four suites"
+    },
+    "rows": [
+      {
+        "suite": "libero_spatial",
+        "suite_label": "LIBERO-Spatial",
+        "public_baseline": 90.0,
+        "paper_checkpoint": 75.33333333333333,
+        "local_checkpoint": 77.66666666666667,
+        "paper_minus_public_pp": -14.666666666666671,
+        "local_minus_public_pp": -12.333333333333329,
+        "local_minus_paper_checkpoint_pp": 2.333333333333343,
+        "paper_requires_retest": false,
+        "local_requires_retest": false,
+        "paired_n": 300,
+        "both_success": 190,
+        "paper_only": 36,
+        "local_only": 43,
+        "both_fail": 31,
+        "paired_difference_pp": 2.3333333333333335,
+        "paired_cluster_bootstrap_95_low": -3.3333333333333335,
+        "paired_cluster_bootstrap_95_high": 8.0,
+        "paired_hierarchical_bootstrap_95_low": -8.0,
+        "paired_hierarchical_bootstrap_95_high": 11.666666666666666,
+        "mcnemar_exact_p": 0.49989687686032663,
+        "mcnemar_holm_adjusted_p": 1.0,
+        "mcnemar_holm_significant_0_05": false
+      },
+      {
+        "suite": "libero_object",
+        "suite_label": "LIBERO-Object",
+        "public_baseline": 96.0,
+        "paper_checkpoint": 88.33333333333333,
+        "local_checkpoint": 86.0,
+        "paper_minus_public_pp": -7.666666666666671,
+        "local_minus_public_pp": -10.0,
+        "local_minus_paper_checkpoint_pp": -2.3333333333333286,
+        "paper_requires_retest": false,
+        "local_requires_retest": false,
+        "paired_n": 300,
+        "both_success": 228,
+        "paper_only": 37,
+        "local_only": 30,
+        "both_fail": 5,
+        "paired_difference_pp": -2.3333333333333335,
+        "paired_cluster_bootstrap_95_low": -8.666666666666666,
+        "paired_cluster_bootstrap_95_high": 4.333333333333333,
+        "paired_hierarchical_bootstrap_95_low": -13.666666666666666,
+        "paired_hierarchical_bootstrap_95_high": 8.666666666666666,
+        "mcnemar_exact_p": 0.4638176178968696,
+        "mcnemar_holm_adjusted_p": 1.0,
+        "mcnemar_holm_significant_0_05": false
+      },
+      {
+        "suite": "libero_goal",
+        "suite_label": "LIBERO-Goal",
+        "public_baseline": 92.0,
+        "paper_checkpoint": 79.0,
+        "local_checkpoint": 81.33333333333333,
+        "paper_minus_public_pp": -13.0,
+        "local_minus_public_pp": -10.666666666666671,
+        "local_minus_paper_checkpoint_pp": 2.3333333333333286,
+        "paper_requires_retest": false,
+        "local_requires_retest": false,
+        "paired_n": 300,
+        "both_success": 198,
+        "paper_only": 39,
+        "local_only": 46,
+        "both_fail": 17,
+        "paired_difference_pp": 2.3333333333333335,
+        "paired_cluster_bootstrap_95_low": -4.333333333333333,
+        "paired_cluster_bootstrap_95_high": 8.333333333333334,
+        "paired_hierarchical_bootstrap_95_low": -7.0,
+        "paired_hierarchical_bootstrap_95_high": 12.333333333333334,
+        "mcnemar_exact_p": 0.5154257318839004,
+        "mcnemar_holm_adjusted_p": 1.0,
+        "mcnemar_holm_significant_0_05": false
+      },
+      {
+        "suite": "libero_10",
+        "suite_label": "LIBERO-Long",
+        "public_baseline": 71.0,
+        "paper_checkpoint": 37.666666666666664,
+        "local_checkpoint": 58.0,
+        "paper_minus_public_pp": -33.333333333333336,
+        "local_minus_public_pp": -13.0,
+        "local_minus_paper_checkpoint_pp": 20.333333333333336,
+        "paper_requires_retest": true,
+        "local_requires_retest": false,
+        "paired_n": 300,
+        "both_success": 83,
+        "paper_only": 30,
+        "local_only": 91,
+        "both_fail": 96,
+        "paired_difference_pp": 20.333333333333332,
+        "paired_cluster_bootstrap_95_low": 11.0,
+        "paired_cluster_bootstrap_95_high": 29.0,
+        "paired_hierarchical_bootstrap_95_low": 3.6666666666666665,
+        "paired_hierarchical_bootstrap_95_high": 34.666666666666664,
+        "mcnemar_exact_p": 2.495730943402904e-08,
+        "mcnemar_holm_adjusted_p": 9.982923773611617e-08,
+        "mcnemar_holm_significant_0_05": true
+      }
+    ]
+  },
+  "comparison_source": {
+    "path": "$REPO_ROOT/results/comparison/comparison.json",
+    "sha256": "295b9db73e6fde958f7637073be2dfc359463159b1be06a9b39d103177d41ca3"
+  },
+  "asset_provenance_source": {
+    "path": "$REPO_ROOT/outputs/provenance/assets.json",
+    "sha256": "bef022862502c89225605d3b2a8d6852b074c1e38b209cad8878e45637451194"
+  },
+  "diagnostics": {
+    "schema_version": 1,
+    "prepared_at_utc": "2026-11-05T09:15:05.230192+00:00",
+    "comparison": "results/comparison/comparison.json",
+    "comparison_sha256": "295b9db73e6fde958f7637073be2dfc359463159b1be06a9b39d103177d41ca3",
+    "requires_retest": true,
+    "triggered_models": {
+      "smolvla_libero_paper": [
+        "libero_10"
+      ]
+    },
+    "plans": [
+      {
+        "model_label": "smolvla_libero_paper",
+        "triggered_suites": [
+          "libero_10"
+        ],
+        "diagnostic_seed": 4000,
+        "source_summary": "results/smolvla_libero_paper/metrics_summary.json",
+        "source_summary_sha256": "11565f4defe480e727e0d2a0c16789b47af36bee5057bf5f7e7a1a1cb0d2a06f",
+        "diagnostic_plan": "results/diagnostics/smolvla_libero_paper/diagnostic_plan.json",
+        "diagnostic_plan_sha256": "32f61289b4d4b2d0b9bdb36e6381f8feacc57967d73ecabb4466c96d32534fb6",
+        "diagnostic_plan_markdown": "results/diagnostics/smolvla_libero_paper/diagnostic_plan.md",
+        "review_template": "results/diagnostics/smolvla_libero_paper/review_template.json",
+        "indexed_failed_videos": 187,
+        "indexed_tasks": 10
+      }
+    ],
+    "next_action": "Review failed videos and record root cause/fix before explicitly approving seed 4000 retest."
+  },
+  "public_checkpoint_source": {
+    "name": "smolvla_libero_paper",
+    "repo": "HuggingFaceVLA/smolvla_libero",
+    "revision": "6721902bc4d61e50a3bfdb11dfb4cb626f05d102",
+    "relative_root": "artifacts/models/smolvla_libero_paper",
+    "valid": true,
+    "file_count": 8,
+    "total_expected_bytes": 1218055540,
+    "tree_manifest": "artifacts/models/smolvla_libero_paper/.cache/huggingface/trees/6721902bc4d61e50a3bfdb11dfb4cb626f05d102.json",
+    "tree_manifest_sha256": "a5f96dbcc328ddef449fe81f70df0838134263f3582f8201ae14c565bcc9d465",
+    "missing_files": [],
+    "size_mismatches": [],
+    "critical_hashes": {
+      "model.safetensors": {
+        "expected_sha256": "71d9563c8295284acba8fc2d5c19de000d6fe9ba58a406832af7ef3d221ed52f",
+        "observed_sha256": "71d9563c8295284acba8fc2d5c19de000d6fe9ba58a406832af7ef3d221ed52f",
+        "matches": true
+      }
+    }
+  }
+}

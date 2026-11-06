@@ -1,0 +1,147 @@
+{
+  "schema_version": 1,
+  "retrieved_on": "2026-08-16",
+  "source_verification": {
+    "verified_at": "2026-08-16T02:57:00+08:00",
+    "arxiv": {
+      "version": "arXiv:2506.01844v1",
+      "source_url": "https://arxiv.org/src/2506.01844v1",
+      "table_path": "tables/main_results_libero.tex",
+      "table_sha256": "00327007cd1811e981fda3ef7ad385402a12c7782e1b17e2cc6c8f0d9c6bf835",
+      "experiments_path": "sections/04_experiments.tex",
+      "experiments_sha256": "4e531455d11acfc32e4543e6c0ccefe527154718fca7baf301011ec6b42ea4f2"
+    },
+    "lerobot_libero_doc": {
+      "source_url": "https://raw.githubusercontent.com/huggingface/lerobot/8ae2354592ec4480c38134fb75350b8e7992e0e9/docs/source/libero.mdx",
+      "sha256": "2d4e37a200684ec790c0218c242d175ed86a7c57bd1523eab2c967fdee683e11"
+    },
+    "paper_checkpoint": {
+      "revision": "6721902bc4d61e50a3bfdb11dfb4cb626f05d102",
+      "repository_head_observed": "6721902bc4d61e50a3bfdb11dfb4cb626f05d102",
+      "repository_last_modified": "2025-09-17T07:58:34.000Z",
+      "current_head_matches_fixed_revision": true,
+      "current_model_card_has_published_libero_scores": false,
+      "model_card_url": "https://huggingface.co/HuggingFaceVLA/smolvla_libero/raw/6721902bc4d61e50a3bfdb11dfb4cb626f05d102/README.md",
+      "model_card_sha256": "8f0505f851e9bec50a1ba37e5776f69bf12f7c8f5307f796deff026fb3761963",
+      "config_url": "https://huggingface.co/HuggingFaceVLA/smolvla_libero/resolve/6721902bc4d61e50a3bfdb11dfb4cb626f05d102/config.json",
+      "config_sha256": "e346a63094732ea28e05b08302a218306cf6541960b663a3cb4b6948e4efe6e0"
+    }
+  },
+  "primary_comparator": {
+    "name": "SmolVLA-0.45B",
+    "parameter_count_billions": 0.45,
+    "robotics_pretraining": false,
+    "source": {
+      "title": "SmolVLA: A vision-language-action model for affordable and efficient robotics",
+      "url": "https://arxiv.org/html/2506.01844",
+      "version": "arXiv:2506.01844v1",
+      "table": "Table 2"
+    },
+    "protocol": {
+      "training": "multi-task",
+      "suites": 4,
+      "tasks_per_suite": 10,
+      "trials_per_task": 10,
+      "total_trials": 400,
+      "metric": "binary task success rate"
+    },
+    "suite_order": [
+      "libero_spatial",
+      "libero_object",
+      "libero_goal",
+      "libero_10"
+    ],
+    "success_rate_percent": {
+      "libero_spatial": 90.0,
+      "libero_object": 96.0,
+      "libero_goal": 92.0,
+      "libero_10": 71.0
+    },
+    "macro_average_percent": 87.3
+  },
+  "checkpoint_comparison_scope": {
+    "episode_conditions_paired": true,
+    "same_model_family": "SmolVLA-0.45B",
+    "same_initialization": false,
+    "causal_training_ablation": false,
+    "paper_checkpoint_vlm": "HuggingFaceTB/SmolVLM2-500M-Instruct",
+    "local_training_vlm": "HuggingFaceTB/SmolVLM2-500M-Video-Instruct",
+    "interpretation": "deployment-level reproduction comparison under identical LIBERO episodes; not an identical-initialization training ablation"
+  },
+  "evaluation_implementation": {
+    "lerobot_commit": "8ae2354592ec4480c38134fb75350b8e7992e0e9",
+    "episode_length_override": null,
+    "resolved_suite_horizons": {
+      "libero_spatial": 280,
+      "libero_object": 280,
+      "libero_goal": 300,
+      "libero_10": 520
+    },
+    "source": "fixed LeRobot TASK_SUITE_MAX_STEPS used by the official recommended command",
+    "paper_disclosure": "SmolVLA Table 2 states tasks/trials/binary success but does not enumerate per-suite episode horizons"
+  },
+  "strong_reference_only": {
+    "name": "Pi0.5 (LeRobot)",
+    "source_url": "https://huggingface.co/docs/lerobot/libero",
+    "success_rate_percent": {
+      "libero_spatial": 97.0,
+      "libero_object": 99.0,
+      "libero_goal": 98.0,
+      "libero_10": 96.0
+    },
+    "macro_average_percent": 97.5,
+    "used_for_40_percent_trigger": false
+  },
+  "methodological_risks": [
+    {
+      "source_url": "https://github.com/huggingface/lerobot/issues/4152",
+      "reported_on": "2026-07-26",
+      "risk": "Outcome-dependent LIBERO reset counts can silently break cross-policy episode pairing.",
+      "project_mitigation": "Fixed LeRobot commit contains 7a3298ea and 8135a8a8; formal evaluation is synchronous batch 1 and pairing_validation.json proves terminal reset count 0 plus 50 fixed states for every task.",
+      "affects_public_baseline": false
+    }
+  ],
+  "reported_reproduction_context": [
+    {
+      "source_url": "https://github.com/huggingface/lerobot/issues/2354",
+      "source_type": "unverified user report on the official LeRobot tracker",
+      "checkpoint": "HuggingFaceVLA/smolvla_libero",
+      "protocol_note": "n_action_steps=1, batch_size=1, 10 episodes/task; exact software/seed/init-state parity is not established",
+      "success_rate_percent": {
+        "libero_spatial": 73.0,
+        "libero_object": 91.0,
+        "libero_goal": 83.0,
+        "libero_10": 43.0
+      },
+      "used_for_40_percent_trigger": false
+    },
+    {
+      "source_url": "https://github.com/huggingface/lerobot/issues/3264",
+      "source_type": "unverified user report on the official LeRobot tracker",
+      "reported_on": "2026-04-02",
+      "checkpoint": "HuggingFaceVLA/smolvla_libero",
+      "protocol_note": "n_action_steps=10 differs from the SmolVLA paper setting, so this is diagnostic context only",
+      "success_rate_percent": {
+        "libero_spatial": 63.0,
+        "libero_object": 93.0,
+        "libero_goal": 81.0,
+        "libero_10": 56.0
+      },
+      "used_for_40_percent_trigger": false
+    },
+    {
+      "source_url": "https://github.com/huggingface/lerobot/issues/3287",
+      "source_type": "unverified user report on the official LeRobot tracker",
+      "reported_on": "2026-04-05",
+      "checkpoint": "locally trained SmolVLA-0.45B, 100k steps, batch 64",
+      "protocol_note": "training reproduction report; exact commit/config/seed parity was the subject of the issue",
+      "success_rate_percent": {
+        "libero_spatial": 83.0,
+        "libero_object": 70.0,
+        "libero_goal": 70.0,
+        "libero_10": 44.8
+      },
+      "used_for_40_percent_trigger": false
+    }
+  ]
+}

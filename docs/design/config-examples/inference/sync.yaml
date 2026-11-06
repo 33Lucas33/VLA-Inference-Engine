@@ -1,0 +1,3 @@
+type: sync
+status: mock_implemented
+max_inflight: 1

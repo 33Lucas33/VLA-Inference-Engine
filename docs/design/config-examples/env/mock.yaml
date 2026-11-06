@@ -1,0 +1,4 @@
+type: mock
+action_dim: 2
+control_frequency_hz: 20
+task: mock_task

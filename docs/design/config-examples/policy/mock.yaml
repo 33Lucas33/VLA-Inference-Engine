@@ -1,0 +1,5 @@
+type: mock
+action_schema_id: mock-v1
+action_dim: 2
+chunk_horizon: 4
+drop_every: 0

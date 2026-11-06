@@ -1,0 +1,44 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "vla-inference-engine"
+version = "0.1.0"
+description = "Reproducible VLA control-loop and LIBERO inference experiments"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = ["numpy>=1.26,<3"]
+
+[project.optional-dependencies]
+test = ["pytest>=8", "ruff>=0.8", "mypy>=1.13"]
+# The fixed LeRobot commit is installed from vendor/lerobot by bootstrap_env.sh.
+libero = ["hf-libero==0.1.4"]
+eval = ["hf-libero==0.1.4", "pyarrow>=18", "PyYAML>=6"]
+live = ["starlette>=1,<2", "uvicorn>=0.52,<1", "Pillow>=12,<13",
+        "imageio>=2.37,<3", "imageio-ffmpeg>=0.6,<1"]
+
+[project.scripts]
+vla-engine = "vla_inference_engine.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+"vla_inference_engine.live" = ["static/*.html", "static/*.js", "static/*.css"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["E4", "E7", "E9", "F", "I"]
+
+[tool.mypy]
+python_version = "3.12"
+packages = ["vla_inference_engine"]
+ignore_missing_imports = true

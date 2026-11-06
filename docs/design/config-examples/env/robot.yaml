@@ -1,0 +1,5 @@
+type: robot
+status: planned
+driver: null
+hold_semantics: null
+hard_limits: null

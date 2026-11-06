@@ -1,0 +1,8 @@
+type: libero_smoke
+status: command_generation_only
+suite: libero_spatial
+task_id: 0
+seed: 1000
+episodes: 1
+control_mode: relative
+hard_reset: true
