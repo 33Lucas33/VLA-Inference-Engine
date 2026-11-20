@@ -21,3 +21,4 @@ results/
 *.pth
 *.pt
 *.mp4
+!docs/showcase/videos/*.mp4

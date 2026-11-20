@@ -4,7 +4,7 @@
 
 **当前已完成：SmolVLA 在 LIBERO 上的双模型测评与结果审计。** 在固定环境和协议下，对公开 checkpoint 与本地训练的 100k checkpoint 完成了 **2400 个 episode**，保存逐 episode 视频和原始结果，并通过六个 seed 及两套汇总的正式校验。
 
-[实验报告](docs/experiments/smolvla_libero_20261105/REPORT.zh-CN.md) · [项目思考与代码阅读路线](docs/PROJECT_GUIDE.zh-CN.md) · [测评运行手册](docs/runbooks/libero.md) · [交互演示台运行手册](docs/runbooks/live-viewer.zh-CN.md) · [后续路线](docs/ROADMAP.md)
+[交互式动作执行长度展示](https://33lucas33.github.io/VLA-Inference-Engine/) · [动作执行长度实验报告](docs/experiments/action_horizon_20261120/REPORT.zh-CN.md) · [双模型测评报告](docs/experiments/smolvla_libero_20261105/REPORT.zh-CN.md) · [项目思考与代码阅读路线](docs/PROJECT_GUIDE.zh-CN.md) · [测评运行手册](docs/runbooks/libero.md) · [交互演示台运行手册](docs/runbooks/live-viewer.zh-CN.md) · [后续路线](docs/ROADMAP.md)
 
 ## 四个可独立交付的子项目
 
