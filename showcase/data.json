@@ -1,0 +1,101 @@
+{
+  "model_chunk_size": 50,
+  "rows": [
+    {
+      "suite": "libero_spatial",
+      "n_action_steps": 1,
+      "success": true,
+      "environment_steps": 72,
+      "model_calls": 72,
+      "asset_name": "spatial-k1"
+    },
+    {
+      "suite": "libero_spatial",
+      "n_action_steps": 5,
+      "success": true,
+      "environment_steps": 75,
+      "model_calls": 15,
+      "asset_name": "spatial-k5"
+    },
+    {
+      "suite": "libero_spatial",
+      "n_action_steps": 10,
+      "success": true,
+      "environment_steps": 75,
+      "model_calls": 8,
+      "asset_name": "spatial-k10"
+    },
+    {
+      "suite": "libero_spatial",
+      "n_action_steps": 20,
+      "success": true,
+      "environment_steps": 75,
+      "model_calls": 4,
+      "asset_name": "spatial-k20"
+    },
+    {
+      "suite": "libero_object",
+      "n_action_steps": 1,
+      "success": true,
+      "environment_steps": 221,
+      "model_calls": 221,
+      "asset_name": "object-k1"
+    },
+    {
+      "suite": "libero_object",
+      "n_action_steps": 5,
+      "success": true,
+      "environment_steps": 155,
+      "model_calls": 31,
+      "asset_name": "object-k5"
+    },
+    {
+      "suite": "libero_object",
+      "n_action_steps": 10,
+      "success": false,
+      "environment_steps": 280,
+      "model_calls": 28,
+      "asset_name": "object-k10"
+    },
+    {
+      "suite": "libero_object",
+      "n_action_steps": 20,
+      "success": true,
+      "environment_steps": 159,
+      "model_calls": 8,
+      "asset_name": "object-k20"
+    },
+    {
+      "suite": "libero_goal",
+      "n_action_steps": 1,
+      "success": true,
+      "environment_steps": 132,
+      "model_calls": 132,
+      "asset_name": "goal-k1"
+    },
+    {
+      "suite": "libero_goal",
+      "n_action_steps": 5,
+      "success": true,
+      "environment_steps": 279,
+      "model_calls": 56,
+      "asset_name": "goal-k5"
+    },
+    {
+      "suite": "libero_goal",
+      "n_action_steps": 10,
+      "success": false,
+      "environment_steps": 300,
+      "model_calls": 30,
+      "asset_name": "goal-k10"
+    },
+    {
+      "suite": "libero_goal",
+      "n_action_steps": 20,
+      "success": true,
+      "environment_steps": 196,
+      "model_calls": 10,
+      "asset_name": "goal-k20"
+    }
+  ]
+}
