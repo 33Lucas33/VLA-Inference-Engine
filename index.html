@@ -7,6 +7,7 @@
     <meta name="description" content="SmolVLA × LIBERO：固定 50 步预测块，交互比较每次执行 1、5、10、20 步时的真实任务轨迹。">
     <title>Action Horizon Lab · VLA Inference Engine</title>
     <link rel="stylesheet" href="showcase/style.css">
+    <link rel="stylesheet" href="showcase/first-screen.css">
     <script src="showcase/app.js" defer></script>
   </head>
   <body>
@@ -20,32 +21,35 @@
     </header>
 
     <main id="top">
-      <section class="hero page-wrap" aria-labelledby="hero-title">
-        <div class="hero-copy">
-          <p class="eyebrow"><span class="eyebrow-line"></span> ACTION HORIZON LAB <span class="muted">/ 01</span></p>
-          <h1 id="hero-title">一次预测，<br><span>执行几步？</span></h1>
-          <p class="hero-lede">同一个 SmolVLA checkpoint，在 LIBERO 中每次预测后连续执行多少步动作，会如何改变推理调用次数和任务轨迹？</p>
-          <div class="hero-actions"><a class="primary-action" href="#explore">观看 12 段真实轨迹 <span aria-hidden="true">↓</span></a><span class="hero-meta">3 个任务 <span>·</span> 4 种执行长度 <span>·</span> 1 个固定模型</span></div>
-        </div>
-        <div class="hero-diagram" aria-label="固定预测 50 步，每次只执行 K 步，然后重新预测">
-          <div class="diagram-top"><span>MODEL OUTPUT</span><strong>50 <small>actions</small></strong></div>
-          <div class="action-grid" aria-hidden="true"></div>
-          <div class="diagram-rule"></div>
-          <div class="diagram-bottom"><div><span>EXECUTE</span><strong>K <small>steps</small></strong></div><div class="diagram-note">K = 1 / 5 / 10 / 20<br>队列耗尽后重新推理</div></div>
-        </div>
-      </section>
-
-      <section id="explore" class="explore-section">
+      <section id="explore" class="explore-section first-screen" aria-labelledby="hero-title">
         <div class="page-wrap">
-          <div class="section-heading"><div><p class="eyebrow">INTERACTIVE EXPERIMENT</p><h2>选择任务，观察差异。</h2></div><p>四种 K 值，来自相同 checkpoint、seed 和初始状态。<br>点击卡片播放对应的完整 episode。</p></div>
-          <div class="task-tabs" role="group" aria-label="选择 LIBERO 任务">
-            <button class="task-tab is-active" type="button" data-task="libero_spatial" aria-pressed="true"><span class="task-index">01</span> 黑碗放盘</button>
-            <button class="task-tab" type="button" data-task="libero_object" aria-pressed="false"><span class="task-index">02</span> 字母汤罐入篮</button>
-            <button class="task-tab" type="button" data-task="libero_goal" aria-pressed="false"><span class="task-index">03</span> 打开中间抽屉</button>
+          <div class="first-screen-intro">
+            <p class="eyebrow">ACTION HORIZON LAB <span class="muted">/ INTERACTIVE EXPERIMENT</span></p>
+            <h1 id="hero-title">一次预测，执行几步？</h1>
+            <p>固定 SmolVLA 的 50 步预测块，切换每次实际执行的步数 K，直接观看 LIBERO 中的任务轨迹。</p>
+          </div>
+          <div class="selector-row">
+            <div class="selector-block">
+              <span class="selector-label">选择任务</span>
+              <div class="task-tabs" role="group" aria-label="选择 LIBERO 任务">
+                <button class="task-tab is-active" type="button" data-task="libero_spatial" aria-pressed="true"><span class="task-index">01</span> 黑碗放盘</button>
+                <button class="task-tab" type="button" data-task="libero_object" aria-pressed="false"><span class="task-index">02</span> 字母汤罐入篮</button>
+                <button class="task-tab" type="button" data-task="libero_goal" aria-pressed="false"><span class="task-index">03</span> 打开中间抽屉</button>
+              </div>
+            </div>
+            <div class="selector-block">
+              <span class="selector-label">每次预测后执行步数 K</span>
+              <div class="horizon-tabs" role="group" aria-label="选择每次预测后的执行步数 K">
+                <button class="horizon-tab is-active" type="button" data-horizon="1" aria-pressed="true">K = 1</button>
+                <button class="horizon-tab" type="button" data-horizon="5" aria-pressed="false">K = 5</button>
+                <button class="horizon-tab" type="button" data-horizon="10" aria-pressed="false">K = 10</button>
+                <button class="horizon-tab" type="button" data-horizon="20" aria-pressed="false">K = 20</button>
+              </div>
+            </div>
           </div>
           <div class="viewer-shell">
             <div class="viewer-topline"><div class="viewer-label"><span class="live-dot"></span> RECORDED ROLLOUT <span class="viewer-divider">/</span> <span id="viewer-task-name">黑碗放盘</span></div><span id="viewer-case">K = 1</span></div>
-            <div class="video-frame"><video id="episode-video" controls muted playsinline preload="metadata" aria-label="LIBERO 双相机任务录像"></video><div id="video-loading" class="video-loading">正在加载实验数据…</div></div>
+            <div class="video-frame"><video id="episode-video" src="showcase/videos/spatial-k1.mp4" poster="showcase/posters/spatial-k1.jpg" controls autoplay loop muted playsinline preload="metadata" aria-label="LIBERO 双相机任务录像"></video><div id="video-loading" class="video-loading" hidden>正在加载实验数据…</div></div>
             <div class="camera-labels"><span>EXTERNAL CAMERA</span><span>WRIST CAMERA</span></div>
             <div class="viewer-stats" aria-live="polite">
               <div><span class="stat-label">本次结果</span><strong id="stat-result">—</strong></div>
@@ -56,7 +60,7 @@
           </div>
           <div class="case-heading"><div><h3>同任务下的四条轨迹</h3><p id="task-instruction">—</p></div><span>点击卡片切换录像</span></div>
           <div id="case-grid" class="case-grid" role="group" aria-label="选择每次预测后的执行步数"></div>
-          <p class="explore-caption">视频以每个仿真动作步一帧、20 fps 回放。播放时长不等于模型运行耗时；两路画面分别为外部相机和腕部相机。</p>
+          <p class="explore-caption">视频自动静音循环，以每个仿真动作步一帧、20 fps 回放。播放时长不等于模型运行耗时；两路画面分别为外部相机和腕部相机。</p>
         </div>
       </section>
 
