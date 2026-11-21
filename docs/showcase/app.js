@@ -31,6 +31,7 @@ function selectCase(task, horizon) {
   video.src = `showcase/videos/${row.asset_name}.mp4`;
   video.poster = `showcase/posters/${row.asset_name}.jpg`;
   video.load();
+  video.play().catch(() => {});
   $("#viewer-task-name").textContent = taskInfo[task].title;
   $("#viewer-case").textContent = `K = ${horizon}`;
   $("#task-instruction").textContent = taskInfo[task].instruction;
@@ -44,18 +45,20 @@ function selectCase(task, horizon) {
     button.classList.toggle("is-active", active);
     button.setAttribute("aria-pressed", String(active));
   });
+  document.querySelectorAll(".horizon-tab").forEach((button) => {
+    const active = Number(button.dataset.horizon) === horizon;
+    button.classList.toggle("is-active", active);
+    button.setAttribute("aria-pressed", String(active));
+  });
   renderGrid();
 }
 
 document.querySelectorAll(".task-tab").forEach((button) => {
   button.addEventListener("click", () => selectCase(button.dataset.task, state.horizon));
 });
-const grid = $(".action-grid");
-for (let index = 0; index < 50; index += 1) {
-  const cell = document.createElement("i");
-  if (index < 10) cell.classList.add("active");
-  grid.append(cell);
-}
+document.querySelectorAll(".horizon-tab").forEach((button) => {
+  button.addEventListener("click", () => selectCase(state.task, Number(button.dataset.horizon)));
+});
 fetch("showcase/data.json")
   .then((response) => { if (!response.ok) throw new Error(`HTTP ${response.status}`); return response.json(); })
   .then((data) => {
@@ -63,4 +66,7 @@ fetch("showcase/data.json")
     selectCase(state.task, state.horizon);
     $("#video-loading").hidden = true;
   })
-  .catch(() => { $("#video-loading").textContent = "实验数据加载失败，请刷新页面。"; });
+  .catch(() => {
+    $("#video-loading").hidden = false;
+    $("#video-loading").textContent = "实验数据加载失败，请刷新页面。";
+  });
