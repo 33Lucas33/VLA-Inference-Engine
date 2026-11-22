@@ -4,10 +4,11 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="theme-color" content="#fafafa">
-    <meta name="description" content="SmolVLA × LIBERO：固定 50 步预测块，交互比较每次执行 1、5、10、20 步时的真实任务轨迹。">
+    <meta name="description" content="SmolVLA × LIBERO：切换 K 值观看任务轨迹，并比较三个任务各 100 次运行的成功率与推理耗时。">
     <title>Action Horizon Lab · VLA Inference Engine</title>
     <link rel="stylesheet" href="showcase/style.css">
     <link rel="stylesheet" href="showcase/first-screen.css">
+    <link rel="stylesheet" href="showcase/success-rate.css">
     <script src="showcase/app.js" defer></script>
   </head>
   <body>
@@ -15,6 +16,7 @@
       <a class="brand" href="#top" aria-label="Action Horizon Lab 首页"><span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i><i></i></span><span>VLA<span class="brand-light"> / </span>INFRA</span></a>
       <nav class="top-nav" aria-label="主导航">
         <a href="#explore">探索实验</a>
+        <a href="#success-rate">成功率与耗时</a>
         <a href="#method">实验方法</a>
         <a class="repo-link" href="https://github.com/33Lucas33/VLA-Inference-Engine" target="_blank" rel="noopener noreferrer">GitHub <span aria-hidden="true">↗</span></a>
       </nav>
@@ -26,7 +28,7 @@
           <div class="first-screen-intro">
             <p class="eyebrow">ACTION HORIZON LAB <span class="muted">/ INTERACTIVE EXPERIMENT</span></p>
             <h1 id="hero-title">一次预测，执行几步？</h1>
-            <p>固定 SmolVLA 的 50 步预测块，切换每次实际执行的步数 K，直接观看 LIBERO 中的任务轨迹。</p>
+            <p>固定 SmolVLA 的 50 步预测块，切换每次实际执行的步数 K，观看 LIBERO 任务轨迹，并查看每种设置下 100 次运行的成功率和推理耗时。</p>
           </div>
           <div class="selector-row">
             <div class="selector-block">
@@ -64,16 +66,33 @@
         </div>
       </section>
 
+      <section id="success-rate" class="success-section page-wrap" aria-labelledby="success-title">
+        <div class="success-heading">
+          <p class="eyebrow">PAIRED EVALUATION <span class="muted">/ 1,200 EPISODES</span></p>
+          <h2 id="success-title">K 对成功率与推理耗时的影响</h2>
+          <p>每个任务、每个 K 都运行 100 次。选择上方任务后，这里会显示对应的统计结果。</p>
+        </div>
+        <div class="success-context"><span id="stats-task-title">黑碗放盘 · task 0</span><span id="stats-episode-count">每种 K：100 episodes</span></div>
+        <div class="success-table-wrap" role="region" aria-label="成功率与推理耗时统计表" tabindex="0">
+          <table class="success-table">
+            <thead><tr><th scope="col">执行步数 K</th><th scope="col">成功率</th><th scope="col">模型调用 / episode</th><th scope="col">推理累计时间 / episode</th><th scope="col">单次调用延迟 P50 / P95</th><th scope="col">完整 rollout / episode</th></tr></thead>
+            <tbody id="success-table-body"><tr><td colspan="6">正在加载统计数据…</td></tr></tbody>
+          </table>
+        </div>
+        <p class="success-note">推理累计时间在动作块生成调用前后同步 CUDA；单次调用 P50/P95 汇总该任务与 K 下的全部推理调用。完整 rollout 时间还包括环境仿真、processor 和 Python 控制循环，不含视频编码。仅测了三个 suite 的 task 0，不能代表整个 LIBERO；同步仿真时间也不等于真机控制周期。</p>
+        <div class="success-links"><a href="https://github.com/33Lucas33/VLA-Inference-Engine/blob/main/docs/experiments/action_horizon_success_rate_20261121/REPORT.zh-CN.md" target="_blank" rel="noopener noreferrer">查看完整实验报告</a><a href="showcase/success-rate.json">下载汇总数据 JSON</a></div>
+      </section>
+
       <section id="method" class="method-section page-wrap">
         <div class="method-intro"><p class="eyebrow">READ THE EXPERIMENT</p><h2>这里改变的<br>究竟是什么？</h2><p>模型始终生成 50 步动作块。改变的是 LeRobot 的 <code>n_action_steps</code>：每次预测后，从这块中连续执行 K 步，再用新的观测调用模型。</p></div>
         <div class="method-list">
-          <div class="method-item"><span>01 / 固定条件</span><p>公开 SmolVLA checkpoint；LIBERO Spatial、Object、Goal 各一个任务；seed 1000、初态 0。每组只运行一个完整 episode。</p></div>
-          <div class="method-item"><span>02 / 实际计数</span><p>模型调用次数直接在动作块生成处计数；环境步数直接在 <code>env.step</code> 处计数。K 越大通常越少调用模型，但轨迹结果并不单调。</p></div>
-          <div class="method-item"><span>03 / 结果边界</span><p>每格只有一条轨迹，不能据此估计总体成功率。含录像的同步仿真耗时受录制与运行顺序影响，不能直接解释为真机控制性能。</p></div>
+          <div class="method-item"><span>01 / 视频案例</span><p>视频展示固定 seed 1000、初态 0 的单次轨迹。统计表另用 seed 1000–1099 和 50 个初态配对评测，每格 100 个 episode。</p></div>
+          <div class="method-item"><span>02 / 推理计时</span><p>在动作块生成处统计真实模型调用；每次调用前后同步 CUDA。记录每次调用延迟、episode 推理累计时间、完整 rollout 时间及成功率。</p></div>
+          <div class="method-item"><span>03 / 结果边界</span><p>只测 Spatial、Object、Goal 各自的 task 0。推理延迟来自 RTX 3090 上的同步仿真，不代表真机控制频率或完整 suite 表现。</p></div>
         </div>
       </section>
 
-      <section class="takeaway-section"><div class="page-wrap takeaway-layout"><div><p class="eyebrow">OBSERVATION</p><h2>更少调用，<br>不保证更稳。</h2></div><div><p>在本次 Object 和 Goal 任务中，K=10 的轨迹失败，而 K=20 成功。它说明执行长度与任务表现的关系值得继续测量，也提醒我们不要用单次视频给 K 排名。</p><div class="takeaway-links"><a href="https://github.com/33Lucas33/VLA-Inference-Engine/blob/main/docs/experiments/action_horizon_20261120/REPORT.zh-CN.md" target="_blank" rel="noopener noreferrer">阅读完整实验报告 <span aria-hidden="true">↗</span></a><a href="https://github.com/33Lucas33/VLA-Inference-Engine" target="_blank" rel="noopener noreferrer">查看项目源码 <span aria-hidden="true">↗</span></a></div></div></div></section>
+      <section class="takeaway-section"><div class="page-wrap takeaway-layout"><div><p class="eyebrow">OBSERVATION</p><h2>更少调用，<br>成功率因任务而异。</h2></div><div><p>K 从 1 增至 20 后，三个任务的平均推理累计时间减少约 18–23 倍。Spatial 和 Object 的成功率上升，Goal 的成功率下降。K 的取舍取决于任务是否需要频繁根据新观测修正动作。</p><div class="takeaway-links"><a href="https://github.com/33Lucas33/VLA-Inference-Engine/blob/main/docs/experiments/action_horizon_success_rate_20261121/REPORT.zh-CN.md" target="_blank" rel="noopener noreferrer">阅读 100 episode 实验报告 <span aria-hidden="true">↗</span></a><a href="https://github.com/33Lucas33/VLA-Inference-Engine/blob/main/docs/experiments/action_horizon_20261120/REPORT.zh-CN.md" target="_blank" rel="noopener noreferrer">查看单次视频实验报告 <span aria-hidden="true">↗</span></a><a href="https://github.com/33Lucas33/VLA-Inference-Engine" target="_blank" rel="noopener noreferrer">查看项目源码 <span aria-hidden="true">↗</span></a></div></div></div></section>
     </main>
     <footer class="site-footer page-wrap"><span>VLA INFERENCE ENGINE <span class="muted">/</span> ACTION HORIZON LAB</span><span>SmolVLA × LIBERO · 2026</span></footer>
   </body>

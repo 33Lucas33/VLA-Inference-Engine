@@ -192,10 +192,17 @@ VLA-Inference-Engine/                 # 仓库本身就是大项目
 
 本次已整理四项导航、每个项目的说明及首项目入口；文档和代码可形成首个 Git 提交。当前仓库仍未配置远端，GitHub 上传需在确定目标仓库并配置安全认证后完成。当前 CI 只运行无资产核心子集；本机完整测试/GPU 验收与远端 CI 分别描述。
 
+## 10. 动作执行长度成功率与推理耗时对照（2026-11-22）
+
+在固定公开 SmolVLA checkpoint、`chunk_size=50`、`num_steps=10` 和相对控制的条件下，使用 LeRobot `n_action_steps`（K）=1/5/10/20 比较动作队列执行长度。选择 LIBERO Spatial/Object/Goal 各自 task 0；每格 100 个 episode、共 1200 个，按相同 seed（1000–1099）和 50 个初态配对。没有改变预测块长，也没有录制这 1200 次的录像。
+
+每条记录含成功、环境步数、实际模型调用次数、动作块推理调用的逐次耗时与汇总、CUDA 同步推理累计时间，以及包含环境和 processor 的完整 rollout 时间。RTX 3090 上 K=1→20 的平均推理累计时间约降低 18–23 倍。成功率方向按任务不同：Spatial 68%→74%，Object 78%→92%，Goal 72%→63%，所以不能推断更大的 K 对所有任务更好。统计表已加到 [GitHub Pages](https://33lucas33.github.io/VLA-Inference-Engine/#success-rate)，可随任务选择切换；代码和固定参数见 `benchmark/action_horizon_success_rate.py`、`scripts/action_horizon_success_rate.sh` 与[运行手册](runbooks/action-horizon-success-rate.zh-CN.md)，完整任务级结果和解释边界见[报告](experiments/action_horizon_success_rate_20261121/REPORT.zh-CN.md)。页面只承载小型聚合数据 `docs/showcase/success-rate.json`；逐 episode 数据保留在本机被忽略的 `runs/action-horizon-success-rate/20261121-100ep-timed/`。
+
 ## 更新记录
 
 | 日期 | 决策与变化 | 证据 |
 |---|---|---|
+| 2026-11-22 | 完成 K=1/5/10/20 在三个 LIBERO task 0 上每格 100 episode 的配对评测；记录成功率、模型调用、逐次推理耗时和完整 rollout 时间；将聚合表加入 GitHub Pages | 1200 条记录、`summary.json complete=true`；[实验报告](experiments/action_horizon_success_rate_20261121/REPORT.zh-CN.md)、`docs/showcase/success-rate.json` 与线上 `#success-rate` |
 | 2026-10-28 | 建立总文档，确立先完成 SmolVLA + LIBERO 测评的顺序 | 首次项目盘点 |
 | 2026-10-29 | 核实原项目范围和正式结果缺失；将测评能力按本仓库现有 `src/scripts/tools/configs/tests` 分层迁入；建立预检、smoke、正式评测和双模型入口；补充固定环境和资产获取 | 当日论文与本地权重预检 JSON、37 项完整测试、`ruff check src`；GPU 占用导致 rollout 待运行 |
 | 2026-11-03 | 完成架构去重与命令/环境统一；执行全量测试和两套权重的真实 smoke；两次核实正式存储门禁 | `tests/` 43 项通过、`ruff` 与 Bash 语法通过；`runs/smoke-paper-spatial0-seed1000-20261103/`、`runs/smoke-local100k-spatial0-seed1000-20261103/`；`outputs/storage/evaluation_checks.jsonl`，正式门禁末次为 17.557 GiB |
