@@ -42,7 +42,6 @@
   margin-bottom: 9px;
 }
 
-.first-screen .task-tabs,
 .horizon-tabs {
   display: flex;
   flex-wrap: wrap;
@@ -50,10 +49,31 @@
   margin: 0;
 }
 
-.first-screen .task-tab,
 .horizon-tab {
   min-height: 42px;
   padding: 10px 14px;
+}
+
+.task-select {
+  min-width: 230px;
+  min-height: 42px;
+  padding: 9px 36px 9px 13px;
+  border: 1px solid #dedede;
+  border-radius: 7px;
+  background: #fff;
+  color: #111;
+  font: inherit;
+  font-size: 14px;
+  font-weight: 650;
+}
+
+.task-select:hover {
+  border-color: #999;
+}
+
+.task-select:focus-visible {
+  outline: 3px solid #999;
+  outline-offset: 2px;
 }
 
 .horizon-tab {
@@ -93,16 +113,8 @@
     margin-top: 14px;
   }
 
-  .first-screen .task-tabs {
-    display: flex;
-  }
-
-  .first-screen .task-tab {
-    padding: 9px 11px;
-    font-size: 14px;
-  }
-
-  .task-index {
-    display: none;
+  .task-select {
+    width: 100%;
+    min-width: 0;
   }
 }

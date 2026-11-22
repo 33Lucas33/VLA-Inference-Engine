@@ -7,9 +7,9 @@
     <meta name="description" content="SmolVLA × LIBERO：切换 K 值观看任务轨迹，并比较三个任务各 100 次运行的成功率与推理耗时。">
     <title>Action Horizon Lab · VLA Inference Engine</title>
     <link rel="stylesheet" href="showcase/style.css">
-    <link rel="stylesheet" href="showcase/first-screen.css">
-    <link rel="stylesheet" href="showcase/success-rate.css?v=20261122-stats1">
-    <script src="showcase/app.js?v=20261122-stats1" defer></script>
+    <link rel="stylesheet" href="showcase/first-screen.css?v=20261122-ui2">
+    <link rel="stylesheet" href="showcase/success-rate.css?v=20261122-ui2">
+    <script src="showcase/app.js?v=20261122-ui2" defer></script>
   </head>
   <body>
     <header class="site-header">
@@ -32,12 +32,12 @@
           </div>
           <div class="selector-row">
             <div class="selector-block">
-              <span class="selector-label">选择任务</span>
-              <div class="task-tabs" role="group" aria-label="选择 LIBERO 任务">
-                <button class="task-tab is-active" type="button" data-task="libero_spatial" aria-pressed="true"><span class="task-index">01</span> 黑碗放盘</button>
-                <button class="task-tab" type="button" data-task="libero_object" aria-pressed="false"><span class="task-index">02</span> 字母汤罐入篮</button>
-                <button class="task-tab" type="button" data-task="libero_goal" aria-pressed="false"><span class="task-index">03</span> 打开中间抽屉</button>
-              </div>
+              <label class="selector-label" for="task-select">选择任务</label>
+              <select id="task-select" class="task-select" aria-label="选择 LIBERO 任务">
+                <option value="libero_spatial">01 · 黑碗放盘</option>
+                <option value="libero_object">02 · 字母汤罐入篮</option>
+                <option value="libero_goal">03 · 打开中间抽屉</option>
+              </select>
             </div>
             <div class="selector-block">
               <span class="selector-label">每次预测后执行步数 K</span>
@@ -60,8 +60,6 @@
               <div><span class="stat-label">执行长度</span><strong id="stat-horizon">—</strong></div>
             </div>
           </div>
-          <div class="case-heading"><div><h3>同任务下的四条轨迹</h3><p id="task-instruction">—</p></div><span>点击卡片切换录像</span></div>
-          <div id="case-grid" class="case-grid" role="group" aria-label="选择每次预测后的执行步数"></div>
           <p class="explore-caption">视频自动静音循环，以每个仿真动作步一帧、20 fps 回放。播放时长不等于模型运行耗时；两路画面分别为外部相机和腕部相机。</p>
         </div>
       </section>
@@ -70,7 +68,7 @@
         <div class="success-heading">
           <p class="eyebrow">PAIRED EVALUATION <span class="muted">/ 1,200 EPISODES</span></p>
           <h2 id="success-title">K 对成功率与推理耗时的影响</h2>
-          <p>每个任务、每个 K 都运行 100 次。选择上方任务后，这里会显示对应的统计结果。</p>
+          <p>每个任务、每个 K 都运行 100 次。使用上方任务选项切换录像和对应的统计表。</p>
         </div>
         <div class="success-context"><span id="stats-task-title">黑碗放盘 · task 0</span><span id="stats-episode-count">每种 K：100 episodes</span></div>
         <div class="success-table-wrap" role="region" aria-label="成功率与推理耗时统计表" tabindex="0">
@@ -80,7 +78,7 @@
           </table>
         </div>
         <p class="success-note">推理累计时间在动作块生成调用前后同步 CUDA；单次调用 P50/P95 汇总该任务与 K 下的全部推理调用。完整 rollout 时间还包括环境仿真、processor 和 Python 控制循环，不含视频编码。仅测了三个 suite 的 task 0，不能代表整个 LIBERO；同步仿真时间也不等于真机控制周期。</p>
-        <div class="success-links"><a href="https://github.com/33Lucas33/VLA-Inference-Engine/blob/main/docs/experiments/action_horizon_success_rate_20261121/REPORT.zh-CN.md" target="_blank" rel="noopener noreferrer">查看完整实验报告</a><a href="showcase/success-rate.json?v=20261122-stats1">下载汇总数据 JSON</a></div>
+        <div class="success-links"><a href="https://github.com/33Lucas33/VLA-Inference-Engine/blob/main/docs/experiments/action_horizon_success_rate_20261121/REPORT.zh-CN.md" target="_blank" rel="noopener noreferrer">查看完整实验报告</a><a href="showcase/success-rate.json?v=20261122-ui2">下载汇总数据 JSON</a></div>
       </section>
 
       <section id="method" class="method-section page-wrap">
