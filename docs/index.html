@@ -8,8 +8,8 @@
     <title>Action Horizon Lab · VLA Inference Engine</title>
     <link rel="stylesheet" href="showcase/style.css">
     <link rel="stylesheet" href="showcase/first-screen.css">
-    <link rel="stylesheet" href="showcase/success-rate.css">
-    <script src="showcase/app.js" defer></script>
+    <link rel="stylesheet" href="showcase/success-rate.css?v=20261122-stats1">
+    <script src="showcase/app.js?v=20261122-stats1" defer></script>
   </head>
   <body>
     <header class="site-header">
@@ -80,7 +80,7 @@
           </table>
         </div>
         <p class="success-note">推理累计时间在动作块生成调用前后同步 CUDA；单次调用 P50/P95 汇总该任务与 K 下的全部推理调用。完整 rollout 时间还包括环境仿真、processor 和 Python 控制循环，不含视频编码。仅测了三个 suite 的 task 0，不能代表整个 LIBERO；同步仿真时间也不等于真机控制周期。</p>
-        <div class="success-links"><a href="https://github.com/33Lucas33/VLA-Inference-Engine/blob/main/docs/experiments/action_horizon_success_rate_20261121/REPORT.zh-CN.md" target="_blank" rel="noopener noreferrer">查看完整实验报告</a><a href="showcase/success-rate.json">下载汇总数据 JSON</a></div>
+        <div class="success-links"><a href="https://github.com/33Lucas33/VLA-Inference-Engine/blob/main/docs/experiments/action_horizon_success_rate_20261121/REPORT.zh-CN.md" target="_blank" rel="noopener noreferrer">查看完整实验报告</a><a href="showcase/success-rate.json?v=20261122-stats1">下载汇总数据 JSON</a></div>
       </section>
 
       <section id="method" class="method-section page-wrap">
