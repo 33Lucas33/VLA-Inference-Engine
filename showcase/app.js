@@ -108,7 +108,7 @@ document.querySelectorAll(".task-tab").forEach((button) => {
 document.querySelectorAll(".horizon-tab").forEach((button) => {
   button.addEventListener("click", () => selectCase(state.task, Number(button.dataset.horizon)));
 });
-Promise.all([fetch("showcase/data.json"), fetch("showcase/success-rate.json")])
+Promise.all([fetch("showcase/data.json?v=20261122-stats1"), fetch("showcase/success-rate.json?v=20261122-stats1")])
   .then(async (responses) => {
     for (const response of responses) {
       if (!response.ok) throw new Error(`HTTP ${response.status}`);
